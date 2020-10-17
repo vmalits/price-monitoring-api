@@ -1,5 +1,5 @@
 #!/bin/bash
 # Script stops containers
 
-cd laradock-pm
+cd laradock
 docker-compose stop

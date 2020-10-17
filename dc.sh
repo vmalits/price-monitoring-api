@@ -1,5 +1,5 @@
 #!/bin/bash
 # Script runs commands inside php docker container
 
-cd laradock-pm
+cd laradock
 docker-compose exec  workspace bash

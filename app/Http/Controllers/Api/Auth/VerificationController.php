@@ -18,11 +18,13 @@ class VerificationController extends Controller
 
     public function verify(int $id, Request $request): JsonResponse
     {
-        return $this->authService->verify($id, $request);
+        $response = $this->authService->verify($id, $request);
+        return response()->json($response['message'], $response['status']);
     }
 
     public function resend(): JsonResponse
     {
-        return $this->authService->resend();
+        $response = $this->authService->resend();
+        return response()->json($response['message'], $response['status']);
     }
 }

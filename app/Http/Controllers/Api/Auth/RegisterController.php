@@ -6,20 +6,14 @@ namespace App\Http\Controllers\Api\Auth;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\RegisterRequest;
 use App\Services\AuthService;
-use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Http\JsonResponse;
 
 class RegisterController extends Controller
 {
-    public function __invoke(RegisterRequest $request)
+    public function __invoke(RegisterRequest $request): JsonResponse
     {
         $authService = app(AuthService::class);
         $authService->register($request);
-        return response()
-            ->json(
-                [
-                    'message' => trans('auth.email_confirm')
-                ],
-                Response::HTTP_CREATED
-            );
+        return $this->responseCreated(trans('auth.email_confirm'));
     }
 }

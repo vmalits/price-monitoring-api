@@ -7,7 +7,7 @@ namespace App\Services;
 use App\Http\Requests\RegisterRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
-use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Validation\ValidationException;
 
 final class AuthService
 {
@@ -17,43 +17,37 @@ final class AuthService
         $user->sendEmailVerificationNotification();
     }
 
-    public function verify(int $id, Request $request): array
+    /**
+     * @param int $id
+     * @param Request $request
+     * @return string|null
+     * @throws ValidationException
+     */
+    public function verify(int $id, Request $request): ?string
     {
         if (!$request->hasValidSignature()) {
-            return [
-                'message' => trans('auth.email_confirm_invalid_signature'),
-                'status' => Response::HTTP_UNAUTHORIZED
-            ];
+            throw ValidationException::withMessages([
+                'signature' => [trans('auth.email_confirm_invalid_signature')]
+            ]);
         }
+
         $user = User::findOrFail($id);
         if (!$user->hasVerifiedEmail()) {
             $user->markEmailAsVerified();
-            return [
-                'message' => trans('auth.email_confirmed'),
-                'status' => Response::HTTP_OK
-            ];
+            return trans('auth.email_confirmed');
         }
 
-        return [
-            'message' => trans('auth.email_already_confirmed'),
-            'status' => Response::HTTP_OK
-        ];
+        return trans('auth.email_already_confirmed');
     }
 
-    public function resend(): array
+    public function resend(): string
     {
         $user = auth()->user();
         if ($user->hasVerifiedEmail()) {
-            return [
-                'message' => trans('auth.email_confirmed'),
-                'status' => Response::HTTP_OK
-            ];
+            return trans('auth.email_confirmed');
         }
 
         $user->sendEmailVerificationNotification();
-        return [
-            'message' => trans('auth.email_link_was_send'),
-            'status' => Response::HTTP_OK
-        ];
+        return trans('auth.email_link_was_send');
     }
 }

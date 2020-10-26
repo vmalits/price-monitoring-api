@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace App\Http\Controllers\Api\Auth;
 
@@ -18,13 +19,13 @@ class VerificationController extends Controller
 
     public function verify(int $id, Request $request): JsonResponse
     {
-        $response = $this->authService->verify($id, $request);
-        return response()->json($response['message'], $response['status']);
+        $message = $this->authService->verify($id, $request);
+        return $this->responseOk($message);
     }
 
     public function resend(): JsonResponse
     {
-        $response = $this->authService->resend();
-        return response()->json($response['message'], $response['status']);
+        $message = $this->authService->resend();
+        return $this->responseOk($message);
     }
 }

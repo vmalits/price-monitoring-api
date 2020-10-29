@@ -9,9 +9,8 @@ Route::group([
 ], function () {
     Route::post('register', RegisterController::class)->name('register');
     Route::get('email/verify/{id}', [VerificationController::class, 'verify'])->name('verification.verify');
-    Route::middleware('auth:sanctum')->group(function () {
+    Route::middleware('auth:api')->group(function () {
         Route::get('email/resend', [VerificationController::class, 'resend'])->name('verification.resend');
     });
-
 });
 

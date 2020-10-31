@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace Tests\Feature\Controllers\Api\Auth;
 
@@ -22,7 +23,7 @@ class RegisterControllerTest extends TestCase
     /** @test */
     public function min_name_length_must_be_two_characters(): void
     {
-        $response = $this->postJson(route('register'),[
+        $response = $this->postJson(route('register'), [
             'name' => 'q'
         ]);
         $response->assertJsonValidationErrors('name');
@@ -31,7 +32,7 @@ class RegisterControllerTest extends TestCase
     /** @test */
     public function max_name_length_must_be_thirty_characters(): void
     {
-        $response = $this->postJson(route('register'),[
+        $response = $this->postJson(route('register'), [
             'name' => $this->faker->sentence(31)
         ]);
         $response->assertJsonValidationErrors('name');
@@ -73,7 +74,7 @@ class RegisterControllerTest extends TestCase
     /** @test */
     public function min_password_length_must_be_eight_characters(): void
     {
-        $response = $this->postJson(route('register'),[
+        $response = $this->postJson(route('register'), [
             'password' => $this->faker->password(3)
         ]);
         $response->assertJsonValidationErrors('password');
@@ -82,7 +83,7 @@ class RegisterControllerTest extends TestCase
     /** @test */
     public function max_password_length_must_be_thirty_characters(): void
     {
-        $response = $this->postJson(route('register'),[
+        $response = $this->postJson(route('register'), [
             'password' => $this->faker->password(31)
         ]);
         $response->assertJsonValidationErrors('password');

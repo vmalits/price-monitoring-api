@@ -23,7 +23,7 @@ use Symfony\Component\HttpFoundation\Response;
  *          url="http://www.apache.org/licenses/LICENSE-2.0.html"
  *      )
  * )
- *      @OA\Server(
+ * @OA\Server(
  *          url=L5_SWAGGER_CONST_HOST,
  *          description="Demo API Server"
  *      )

@@ -133,7 +133,14 @@ return [
                         ],
                     ],
                 ],
-                */
+//                */
+                'bearer' => [
+                    'type' => 'http',
+                    'description' => 'Authorization token obtained from logging in.',
+                    'name' => 'Authorization',
+                    'in' => 'header',
+                    'scheme' => 'bearer',
+                ],
             ],
             'security' => [
                 /*
@@ -191,8 +198,8 @@ return [
         /*
          * Uncomment to add constants which can be used in annotations
          */
-         'constants' => [
-         'L5_SWAGGER_CONST_HOST' => env('L5_SWAGGER_CONST_HOST', 'http://my-default-host.com'),
-         ],
+        'constants' => [
+            'L5_SWAGGER_CONST_HOST' => env('L5_SWAGGER_CONST_HOST', 'http://my-default-host.com'),
+        ],
     ],
 ];

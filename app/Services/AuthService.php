@@ -1,9 +1,9 @@
 <?php
-
 declare(strict_types=1);
 
 namespace App\Services;
 
+use App\Exceptions\DontVerifiedEmailException;
 use App\Http\Requests\RegisterRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -49,5 +49,31 @@ final class AuthService
 
         $user->sendEmailVerificationNotification();
         return trans('auth.email_link_was_send');
+    }
+
+    /**
+     * @param Request $request
+     * @return array|string|null
+     * @throws ValidationException
+     * @throws DontVerifiedEmailException
+     */
+    public function login(Request $request): ?string
+    {
+        $credentials = $request->only('email', 'password');
+        if (!auth()->attempt($credentials)) {
+            throw ValidationException::withMessages([
+                'email' => [trans('auth.incorrect_credentials')],
+            ]);
+        }
+        if (!auth()->user()->hasVerifiedEmail()) {
+            throw new DontVerifiedEmailException(trans('auth.please_confirm_email'));
+        }
+
+        return $this->getToken();
+    }
+
+    public function getToken(): string
+    {
+        return auth()->user()->createToken('personal token')->accessToken;
     }
 }

@@ -19,6 +19,40 @@
         }
     ],
     "paths": {
+        "/auth/login": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Login",
+                "description": "Login",
+                "operationId": "Login",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/LoginRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                }
+            }
+        },
         "/auth/register": {
             "post": {
                 "tags": [
@@ -149,6 +183,23 @@
     },
     "components": {
         "schemas": {
+            "LoginRequest": {
+                "title": "Login request",
+                "description": "request body data",
+                "properties": {
+                    "email": {
+                        "title": "email",
+                        "type": "string",
+                        "example": "john_white@gmail.com"
+                    },
+                    "password": {
+                        "title": "password",
+                        "type": "string",
+                        "example": "password"
+                    }
+                },
+                "type": "object"
+            },
             "RegisterRequest": {
                 "title": "Register request",
                 "description": "request body data",
@@ -186,6 +237,15 @@
             },
             "403": {
                 "description": "Forbidden"
+            }
+        },
+        "securitySchemes": {
+            "bearer": {
+                "type": "http",
+                "description": "Authorization token obtained from logging in.",
+                "name": "Authorization",
+                "in": "header",
+                "scheme": "bearer"
             }
         }
     },

@@ -35,6 +35,26 @@ class Company
 
     /**
      * @OA\Property(
+     *     title="email",
+     *     description="email",
+     * )
+     *
+     * @var string
+     */
+    private $email;
+
+    /**
+     * @OA\Property(
+     *     title="phone_number",
+     *     description="phone_number",
+     * )
+     *
+     * @var string
+     */
+    private $phone_number;
+
+    /**
+     * @OA\Property(
      *     title="Created at",
      *     description="Created at",
      *     example="2020-01-27 17:50:45",

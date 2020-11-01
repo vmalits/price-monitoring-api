@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\Auth\LoginController;
 use App\Http\Controllers\Api\Auth\RegisterController;
 use App\Http\Controllers\Api\Auth\VerificationController;
+use App\Http\Controllers\Api\CompanyController;
 use Illuminate\Support\Facades\Route;
 
 Route::group([
@@ -16,3 +17,6 @@ Route::group([
     });
 });
 
+Route::middleware('auth:api')->group(function () {
+    Route::apiResource('companies', CompanyController::class);
+});

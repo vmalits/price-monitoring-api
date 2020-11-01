@@ -6,12 +6,13 @@ namespace Tests\Feature\Controllers\Api;
 use App\Models\Company;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\WithFaker;
 use Laravel\Passport\Passport;
 use Tests\TestCase;
 
 class CompanyControllerTest extends TestCase
 {
-    use RefreshDatabase;
+    use RefreshDatabase, WithFaker;
 
     /** @test */
     public function it_fails_if_user_is_not_authenticated(): void
@@ -42,11 +43,13 @@ class CompanyControllerTest extends TestCase
             ['*']
         );
 
-        $this->postJson('/api/companies', [
-            'name' => $name = 'orange.md'
-        ])->assertCreated();
+        $newCompany = Company::factory()->make();
+        $this->postJson('/api/companies', $newCompany->toArray())
+            ->assertCreated();
         $this->assertDatabaseHas('companies', [
-            'name' => $name
+            'name' => $newCompany->name,
+            'email' => $newCompany->email,
+            'phone_number' => $newCompany->phone_number
         ]);
     }
 
@@ -59,12 +62,42 @@ class CompanyControllerTest extends TestCase
         );
 
         $company = Company::factory()->create();
-        $name = 'New company name';
-        $this->putJson('/api/companies/' . $company->id, [
-            'name' => $name
-        ]);
+        $updatedCompanyData = Company::factory()->make();
+        $this->putJson('/api/companies/' . $company->id, $updatedCompanyData->toArray());
         $this->assertDatabaseHas('companies', [
-            'name' => $name
+            'name' => $updatedCompanyData->name
+        ]);
+    }
+
+    /** @test */
+    public function it_updates_company_email(): void
+    {
+        Passport::actingAs(
+            User::factory()->create(),
+            ['*']
+        );
+
+        $company = Company::factory()->create();
+        $updatedCompanyData = Company::factory()->make();
+        $this->putJson('/api/companies/' . $company->id, $updatedCompanyData->toArray());
+        $this->assertDatabaseHas('companies', [
+            'email' => $updatedCompanyData->email
+        ]);
+    }
+
+    /** @test */
+    public function it_updates_company_phone_number(): void
+    {
+        Passport::actingAs(
+            User::factory()->create(),
+            ['*']
+        );
+
+        $company = Company::factory()->create();
+        $updatedCompanyData = Company::factory()->make();
+        $this->putJson('/api/companies/' . $company->id, $updatedCompanyData->toArray());
+        $this->assertDatabaseHas('companies', [
+            'phone_number' => $updatedCompanyData->phone_number
         ]);
     }
 

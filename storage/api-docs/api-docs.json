@@ -317,7 +317,7 @@
                     "Companies"
                 ],
                 "summary": "Update existing company",
-                "description": "Returns updated campaign data",
+                "description": "Returns updated company data",
                 "operationId": "updateCompany",
                 "parameters": [
                     {
@@ -433,6 +433,16 @@
                         "description": "name",
                         "type": "string"
                     },
+                    "email": {
+                        "title": "email",
+                        "description": "email",
+                        "type": "string"
+                    },
+                    "phone_number": {
+                        "title": "phone_number",
+                        "description": "phone_number",
+                        "type": "string"
+                    },
                     "created_at": {
                         "title": "Created at",
                         "description": "Created at",
@@ -458,6 +468,16 @@
                         "title": "name",
                         "type": "string",
                         "example": "orange.md"
+                    },
+                    "email": {
+                        "title": "email",
+                        "type": "string",
+                        "example": "orange@md"
+                    },
+                    "phone_number": {
+                        "title": "phone_number",
+                        "type": "string",
+                        "example": "089424913"
                     }
                 },
                 "type": "object"

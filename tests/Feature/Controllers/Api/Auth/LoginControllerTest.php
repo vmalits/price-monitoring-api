@@ -76,6 +76,6 @@ class LoginControllerTest extends TestCase
             'password' => $password
         ]);
 
-        $response->assertJsonFragment(['error' => 'Please confirm your email.']);
+        $response->assertJsonFragment(['message' => 'Please confirm your email.']);
     }
 }

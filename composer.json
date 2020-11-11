@@ -17,7 +17,8 @@
         "laravel/horizon": "^5.4",
         "laravel/passport": "^10.0",
         "laravel/tinker": "^2.0",
-        "predis/predis": "^1.1"
+        "predis/predis": "^1.1",
+        "vladimir-yuldashev/laravel-queue-rabbitmq": "^11.0"
     },
     "require-dev": {
         "roave/security-advisories": "dev-master",

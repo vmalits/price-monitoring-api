@@ -1,7 +1,5 @@
 <?php
 
-use App\Models\User;
-use App\Notifications\NotifyUser;
 use Illuminate\Support\Facades\Route;
 
 /*

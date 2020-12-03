@@ -1,8 +1,8 @@
 {
     "openapi": "3.0.0",
     "info": {
-        "title": "Scraping Master Documentation",
-        "description": "Scraping Swagger OpenApi",
+        "title": "Price monitoring Documentation",
+        "description": "Price Monitoring Swagger OpenApi",
         "contact": {
             "email": "vladimir.malits@gmail.com"
         },

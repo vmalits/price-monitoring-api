@@ -13,8 +13,8 @@ use Symfony\Component\HttpFoundation\Response;
 /**
  * @OA\Info(
  *      version="1.0.0",
- *      title="Scraping Master Documentation",
- *      description="Scraping Swagger OpenApi",
+ *      title="Price monitoring Documentation",
+ *      description="Price Monitoring Swagger OpenApi",
  *      @OA\Contact(
  *          email="vladimir.malits@gmail.com"
  *      ),
@@ -23,7 +23,7 @@ use Symfony\Component\HttpFoundation\Response;
  *          url="http://www.apache.org/licenses/LICENSE-2.0.html"
  *      )
  * )
- * @OA\Server(
+ *      @OA\Server(
  *          url=L5_SWAGGER_CONST_HOST,
  *          description="Demo API Server"
  *      )

@@ -38,6 +38,13 @@ $ php artisan key:generate
 $ composer install
 ```
 
+```
+$ php artisan migrate 
+```
+```
+$ php artisan passport:install
+```
+
 ## Info
 
 ``` $ ./run.sh ```  Command runs docker containers
